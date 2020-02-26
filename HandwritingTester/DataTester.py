@@ -1,6 +1,8 @@
 import numpy as np
 import theano as th
 
+#Need to tweak backend using this fix: https://github.com/keras-team/keras/issues/13684
+
 np.random.seed(123)
 
 from matplotlib import pyplot as plt
@@ -16,7 +18,7 @@ from keras.datasets import mnist
 
 def test1():
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
-    X_train.reshape(X_train.shape[0], 1, 28, 28)
+    X_train = X_train.reshape(X_train.shape[0], 1, 28, 28)
     X_test = X_test.reshape(X_test.shape[0], 1, 28, 28)
     X_train = X_train.astype('float32')
     X_test = X_test.astype('float32')
