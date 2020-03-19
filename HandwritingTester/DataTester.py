@@ -7,7 +7,7 @@ np.random.seed(123)
 
 from matplotlib import pyplot as plt
 
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 
 from keras.layers import Dense, Dropout, Activation, Flatten, Convolution2D, MaxPooling2D
 
@@ -44,11 +44,17 @@ def test1():
 
     # 9. Fit model on training data
     model.fit(X_train, Y_train,
-              batch_size=32, nb_epoch=10, verbose=1)
+              batch_size=32, epochs=3, verbose=1)
 
     # 10. Evaluate model on test data
     score = model.evaluate(X_test, Y_test, verbose=0)
 
+    model.save("handwritingModel.h5")
+
     print(score)
 
+def test2():
+    m = load_model("handwritingModel.h5")
+    m.evaluate()
+    
 
