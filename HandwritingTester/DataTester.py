@@ -44,7 +44,7 @@ def test1():
 
     # 9. Fit model on training data
     model.fit(X_train, Y_train,
-              batch_size=32, epochs=3, verbose=1)
+              batch_size=32, epochs=5, verbose=1)
 
     # 10. Evaluate model on test data
     score = model.evaluate(X_test, Y_test, verbose=0)
@@ -54,7 +54,19 @@ def test1():
     print(score)
 
 def test2():
+    #https://towardsdatascience.com/understanding-and-calculating-the-number-of-parameters-in-convolution-neural-networks-cnns-fc88790d530d
+    (X_train, y_train), (X_test, y_test) = mnist.load_data()
+    X_train = X_train.reshape(X_train.shape[0], 1, 28, 28)
+    X_test = X_test.reshape(X_test.shape[0], 1, 28, 28)
+    X_train = X_train.astype('float32')
+    X_test = X_test.astype('float32')
+    X_train /= 255
+    X_test /= 255
+    Y_train = np_utils.to_categorical(y_train, 10)
+    Y_test = np_utils.to_categorical(y_test, 10)
+
     m = load_model("handwritingModel.h5")
-    m.evaluate()
+
+    print(m.evaluate(X_test, Y_test, verbose = 0))
     
 
